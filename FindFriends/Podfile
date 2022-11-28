@@ -1,0 +1,15 @@
+# Uncomment the next line to define a global platform for your project
+ platform :ios, '11.0'
+
+target 'FindFriends' do
+  use_frameworks!
+  
+  pod 'Alamofire', '~> 4.9.1'
+  pod 'Then'
+  pod 'RxSwift'
+  pod 'PromiseKit'
+  pod 'SnapKit'
+  pod 'SwiftEntryKit'
+  pod 'ObjectMapper'
+
+end

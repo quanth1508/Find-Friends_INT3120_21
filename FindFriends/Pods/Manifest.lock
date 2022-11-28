@@ -1,0 +1,48 @@
+PODS:
+  - Alamofire (4.9.1)
+  - ObjectMapper (4.2.0)
+  - PromiseKit (6.18.1):
+    - PromiseKit/CorePromise (= 6.18.1)
+    - PromiseKit/Foundation (= 6.18.1)
+    - PromiseKit/UIKit (= 6.18.1)
+  - PromiseKit/CorePromise (6.18.1)
+  - PromiseKit/Foundation (6.18.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.18.1):
+    - PromiseKit/CorePromise
+  - RxSwift (6.5.0)
+  - SnapKit (5.6.0)
+  - SwiftEntryKit (2.0.0)
+  - Then (3.0.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.9.1)
+  - ObjectMapper
+  - PromiseKit
+  - RxSwift
+  - SnapKit
+  - SwiftEntryKit
+  - Then
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - ObjectMapper
+    - PromiseKit
+    - RxSwift
+    - SnapKit
+    - SwiftEntryKit
+    - Then
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  PromiseKit: 49d70c53d5d20e346beaea4b276b5dd2ab446bb4
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SwiftEntryKit: 61b5fa36f34a97dd8013e48a7345bc4c4720be9a
+  Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
+
+PODFILE CHECKSUM: c1dca3f73cc07d3d39fd973ce87916fc7b5f6513
+
+COCOAPODS: 1.11.3

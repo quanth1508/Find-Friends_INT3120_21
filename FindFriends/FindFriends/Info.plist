@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string></string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Cho phép sử dụng microphone của bạn để gửi tin nhắn thoại</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Cho phép ứng dụng lưu ảnh trên thiết bị của bạn?</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Lưu ảnh đơn hàng</string>
+</dict>
+</plist>

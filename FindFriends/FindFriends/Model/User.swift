@@ -31,3 +31,17 @@ struct User: Then {
     
     init() { }
 }
+
+extension User: Mappable {
+    init?(map: Map) { }
+    
+    mutating func mapping(map: Map) {
+        uid             <- map["uid"]
+        username        <- map["username"]
+        profileImageUrl <- map["profileImageUrl"]
+        bio             <- map["bio"]
+        followingCount  <- map["followingCount"]
+        followersCount  <- map["followersCount"]
+        postsCount      <- map["postsCount"]
+    }
+}

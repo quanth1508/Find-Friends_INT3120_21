@@ -3,4 +3,54 @@
    uuid = "7E396893-AE89-4D81-A856-3459F90B3228"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE2B7150-DE1E-4A1F-95A5-64DDE93A5114"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FindFriends/FFApiRouter/APIRouter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "421"
+            endingLineNumber = "421"
+            landmarkName = "pk_uploadRequest(SessionManager:debugRequest:debugResponse:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CE2B7150-DE1E-4A1F-95A5-64DDE93A5114 - bb27b4183ebd79d1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Alamofire.DataResponse&lt;Any&gt;) throws -&gt; Swift.AnyObject in FindFriends.FFAPIUploadRouter.pk_uploadRequest(SessionManager: Alamofire.SessionManager, debugRequest: Swift.Bool, debugResponse: Swift.Bool) -&gt; PromiseKit.Promise&lt;Swift.AnyObject&gt;"
+                  moduleName = "FindFriends"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/quantran/Developer/MyProject/Find-Friends/FindFriends/FindFriends/FFApiRouter/APIRouter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "421"
+                  endingLineNumber = "421"
+                  offsetFromSymbolStart = "304">
+               </Location>
+               <Location
+                  uuid = "CE2B7150-DE1E-4A1F-95A5-64DDE93A5114 - bb27b4183ebd79d1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Alamofire.DataResponse&lt;Any&gt;) throws -&gt; Swift.AnyObject in FindFriends.FFAPIUploadRouter.pk_uploadRequest(SessionManager: Alamofire.SessionManager, debugRequest: Swift.Bool, debugResponse: Swift.Bool) -&gt; PromiseKit.Promise&lt;Swift.AnyObject&gt;"
+                  moduleName = "FindFriends"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/quantran/Developer/MyProject/Find-Friends/FindFriends/FindFriends/FFApiRouter/APIRouter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "421"
+                  endingLineNumber = "421"
+                  offsetFromSymbolStart = "320">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

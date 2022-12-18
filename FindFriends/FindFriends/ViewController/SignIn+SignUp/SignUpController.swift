@@ -172,9 +172,13 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         guard let password = passwordTextField.text, !password.isEmpty else { return }
         guard let bio = bioTextField.text, !bio.isEmpty else { return }
         
-        
         guard let email = emailTextField.text, !email.isEmpty else {
             showAlertMissingInfor(from: .email)
+            return
+        }
+        
+        guard let avatarImage = photoButton.imageView?.image else {
+            showAlertMissingInfor(from: .avatar)
             return
         }
         guard let firstName = firstNameTextField.text, !username.isEmpty else {
@@ -195,8 +199,11 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         }
         
         firstly {
+            AuthenticationService().uploadImage(image: avatarImage)
+        }
+        .then {
             AuthenticationService().registration(
-                avatar: photoButton.imageView?.image,
+                avatar: $0,
                 email: email,
                 firstName: firstName,
                 lastName: lastName,

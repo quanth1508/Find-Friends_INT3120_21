@@ -9,6 +9,8 @@ import Foundation
 import Alamofire
 
 
+protocol FFApiRouterUploadV2: FFApiRouter, FFAPIUploadRouter { }
+
 protocol FFApiRouter: APIRouter {
     var domain: Domain { get }
 }
@@ -73,7 +75,7 @@ extension FFApiRouter {
         switch domain {
         case .localHost:
             if !FFUser.shared.token.isEmpty {
-                headers["Authorization"] = "Bearer " + FFUser.shared.token
+                headers["Authorization"] = FFUser.shared.token
             }
         }
         
@@ -117,5 +119,19 @@ extension Dictionary {
     
     static func +(lhs: [Key : Value], rhs: [Key : Value]) -> [Key : Value] {
         return lhs.appending(rhs)
+    }
+}
+
+extension MultipartFormData {
+    func append(mData: (data: Data, withName: String, fileName: String, mimeType: String)?) {
+        if let mData = mData {
+            self.append(mData.data, withName: mData.withName, fileName: mData.fileName, mimeType: mData.mimeType)
+        }
+    }
+    
+    func append(params: Parameters) {
+        for param in params {
+            self.append("\(param.value)".data(using: String.Encoding.utf8)!, withName: param.key)
+        }
     }
 }

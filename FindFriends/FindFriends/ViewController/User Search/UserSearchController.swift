@@ -92,7 +92,6 @@ extension UserSearchController: UICollectionViewDelegateFlowLayout {
         searchBar.resignFirstResponder()
         var user = filteredUsers[indexPath.item]
         let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
-        user.profileImageUrl = "https://www.google.com/imgres?imgurl=https%3A%2F%2Ficdn.dantri.com.vn%2Fthumb_w%2F640%2F2017%2F1-1510967806416.jpg&imgrefurl=https%3A%2F%2Fdantri.com.vn%2Fsuc-manh-so%2Fbo-anh-chup-bang-dien-thoai-nhung-dep-den-ngo-ngang-2017111808281281.htm&tbnid=bIveYLJfYn9jyM&vet=12ahUKEwiT64mB0b77AhWLG6YKHYZFCT0QMygdegUIARD6AQ..i&docid=H4IiSGMwSKkXUM&w=640&h=853&q=%E1%BA%A3nh%20%C4%91%E1%BA%B9p&ved=2ahUKEwiT64mB0b77AhWLG6YKHYZFCT0QMygdegUIARD6AQ"
         userProfileController.user = user
         userProfileController.userId = user.uid
         navigationController?.pushViewController(userProfileController, animated: true)

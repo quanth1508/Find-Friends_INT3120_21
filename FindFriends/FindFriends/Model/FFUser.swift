@@ -19,7 +19,6 @@ enum Role: String {
 struct FFUser {
     static var shared = FFUser()
     
-    var id        : String = ""
     var name      : String {
         lastName + " \(firstName)"
     }
@@ -32,6 +31,15 @@ struct FFUser {
     
     var following: [String] = []
     var follower: [String] = []
+    
+    var id : String {
+        get {
+            return UserDefaults.standard.string(forKey: PreferenceKey.User.id) ?? ""
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: PreferenceKey.User.id)
+        }
+    }
     
     var token: String {
         get {
@@ -58,6 +66,7 @@ struct FFUser {
 struct PreferenceKey {
     struct User {
         static let token = "token_current_ff"
+        static let id    = "id"
     }
 }
 
@@ -75,6 +84,7 @@ extension FFUser: Mappable {
         follower  <- map["follower"]
         firstName <- map["firstName"]
         lastName  <- map["lastName"]
+        avatar <- map["image"]
     }
 }
 

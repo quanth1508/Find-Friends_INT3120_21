@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import ObjectMapper
+
 
 struct Comment {
     
-    let user: User
-    let text: String
-    let uid: String
+    var user : User = User()
+    var text : String = ""
+    var uid  : String = ""
 
     init(user: User, dictionary: [String: Any]) {
         self.user = user
@@ -19,4 +21,15 @@ struct Comment {
         self.uid = dictionary["uid"] as? String ?? ""
     }
     
+    init() { }
+}
+
+extension Comment: Mappable {
+    init?(map: Map) { }
+    
+    mutating func mapping(map: Map) {
+        user <- map["user"]
+        text <- (map["text"], MapFromJSONToString)
+        uid  <- (map["uid"], MapFromJSONToString)
+    }
 }

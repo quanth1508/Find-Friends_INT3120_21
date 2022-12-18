@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import PromiseKit
+
 
 class HomeController: UICollectionViewController, HomePostCellDelegate {
     
@@ -21,6 +23,8 @@ class HomeController: UICollectionViewController, HomePostCellDelegate {
     var fetchingMore = false
     var endReached = false
     let leadingScreenForBatching:CGFloat = 2
+    
+    private let homeService = HomeService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,15 +43,11 @@ class HomeController: UICollectionViewController, HomePostCellDelegate {
         setupDMbarbuttomItem()
         setupNavigationItems()
         fetchUser()
-        beginBatchFetch()
+        fetchFeedPosts()
     }
     
     private func fetchUser() {
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        Database.fetchUserWithUID(uid: uid) { (user) in
-//            self.user = user
-//            //self.navigationItem.title = self.user?.username
-//        }
+        self.navigationItem.title = FFUser.shared.name
     }
     
     private func setupDMbarbuttomItem () {
@@ -71,40 +71,27 @@ class HomeController: UICollectionViewController, HomePostCellDelegate {
     
     private var startKey:String?
     
-    private func fetchFeedPosts(completion: @escaping (_ posts:[Post])->()) {
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        let postsRef = Database.database().reference().child("FeedPosts").child(uid)
-//
-//
-//        var queryRef:DatabaseQuery
-//        if startKey == nil {
-//            queryRef = postsRef.queryOrderedByKey().queryLimited(toFirst: 3)
-//        } else {
-//            queryRef = postsRef.queryOrderedByKey().queryStarting(atValue: startKey).queryLimited(toFirst: 3)
-//        }
-//
-//        queryRef.observeSingleEvent(of: .value) { snapshot in
-//            var newPosts = [Post]()
-//            guard let dictionaries = snapshot.value as? [String: Any] else { return }
-//            dictionaries.forEach({ (key, value) in
-//                if self.startKey != key {
-//                    guard let dictionary = value as? [String: Any] else { return }
-//                    guard let userDic = dictionary["user"] as? [String: Any] else { return }
-//                    let user = User(uid: userDic["userId"] as! String, dictionary: userDic)
-//                    var post = Post(user: user, dictionary: dictionary)
-//                    post.id = key
-//                    newPosts.append(post)
-//                }
-//            })
-//            newPosts.sort { (p1, p2) -> Bool in
-//                let date1 = Double(p1.creationDate.timeIntervalSince1970)
-//                let date2 = Double(p2.creationDate.timeIntervalSince1970)
-//                return date1 < date2
-//            }
-//            let lastSnapshot = snapshot.children.allObjects.last as! DataSnapshot
-//            self.startKey = lastSnapshot.key
-//            completion(newPosts)
-//        }
+    private func fetchFeedPosts() {
+        fetchingMore = true
+        firstly {
+            homeService.fetchMyPost()
+        }
+        .ensure { [weak self] in
+            guard let self = self else { return }
+            self.fetchingMore = false
+            self.collectionView?.refreshControl?.endRefreshing()
+        }
+        .done { [weak self] posts in
+            guard let self = self else { return }
+            self.posts.append(contentsOf: posts)
+            self.endReached = posts.count == 0
+            print(self.posts.count)
+            self.collectionView.reloadData()
+        }
+        .catch { [weak self] error in
+            guard let self = self else { return }
+            error.showAlert(from: self)
+        }
     }
     
     @objc func handleUpdateFeed() {
@@ -112,9 +99,8 @@ class HomeController: UICollectionViewController, HomePostCellDelegate {
     }
 
     @objc func refresh() {
-        print("refresh...")
-        //posts.removeAll()
-        self.collectionView?.refreshControl?.endRefreshing()
+        posts.removeAll()
+        fetchFeedPosts()
     }
     
     
@@ -133,23 +119,11 @@ class HomeController: UICollectionViewController, HomePostCellDelegate {
         //print("\(offsetY): \(contentHeight)")
         if offsetY > contentHeight - scrollView.frame.size.height * leadingScreenForBatching {
             if !fetchingMore && !endReached {
-                beginBatchFetch()
+                fetchFeedPosts()
             }
         }
         print(posts.count)
     }
-    
-    private func beginBatchFetch() {
-        fetchingMore = true
-        fetchFeedPosts() { newPosts in
-            self.posts.append(contentsOf: newPosts)
-            self.endReached = newPosts.count == 0
-            print(self.posts.count)
-            self.fetchingMore = false
-            self.collectionView.reloadData()
-        }
-    }
-
 }
 
 // MARK:- UICollectionViewDelegateFlowLayout

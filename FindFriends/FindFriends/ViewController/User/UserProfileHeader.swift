@@ -12,8 +12,7 @@ class UserProfileHeader: UICollectionViewCell {
    
     var user: User? {
         didSet {
-//            guard let profileImageUrl = user?.profileImageUrl else { return }
-            profileImageView.loadImage(urlString: "https://icdn.dantri.com.vn/thumb_w/640/2017/1-1510967806416.jpg")
+            profileImageView.loadImage(urlString: user?.profileImageUrl ?? "")
             usernameLabel.text = user?.username
             userBio.text = user?.bio
             delegate?.setupHeaderEditFollowButton(for: self)
@@ -90,6 +89,7 @@ class UserProfileHeader: UICollectionViewCell {
         let iv = CustomImageView()
         iv.layer.cornerRadius = 100 / 2
         iv.clipsToBounds = true
+        iv.image = UIImage(named: "ic_user_placeholder")
         return iv
     }()
     

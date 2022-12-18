@@ -405,8 +405,8 @@ extension FFAPIUploadRouter {
     public
     func pk_uploadRequest(
         SessionManager: SessionManager = SessionManager.default,
-        debugRequest  : Bool = false,
-        debugResponse : Bool = false
+        debugRequest  : Bool = true,
+        debugResponse : Bool = true
     ) -> Promise<AnyObject> {
         firstly {
             _pk_uploadRequest(SessionManager : SessionManager,
@@ -429,8 +429,8 @@ extension FFAPIUploadRouter {
     internal
     func _pk_uploadRequest(
         SessionManager: SessionManager = SessionManager.default,
-        debugRequest  : Bool = false,
-        debugResponse : Bool = false
+        debugRequest  : Bool = true,
+        debugResponse : Bool = true
     ) -> Promise<DataResponse<Any>> {
         .init { (resolver) in
             SessionManager

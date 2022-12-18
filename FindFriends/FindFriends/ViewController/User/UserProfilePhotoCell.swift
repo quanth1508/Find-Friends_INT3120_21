@@ -10,8 +10,7 @@ import UIKit
 class UserProfilePhotoCell: UICollectionViewCell {
     var post: Post? {
         didSet {
-//            guard let imageUrl = post?.imageUrl else { return }
-            photoImageView.loadImage(urlString: "https://icdn.dantri.com.vn/thumb_w/640/2017/1-1510967806416.jpg")
+            photoImageView.loadImage(urlString: post?.imageUrl ?? "")
         }
     }
 

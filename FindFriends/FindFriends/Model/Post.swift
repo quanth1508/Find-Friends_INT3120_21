@@ -13,7 +13,7 @@ import ObjectMapper
 struct Post: Then {
     
     var id           : String?  = nil
-    var user         : User     = FFUser.shared.convertToUser()
+    var user         : User     = .init()
     var imageUrl     : String   = ""
     var caption      : String   = ""
     var creationDate : Date     = Date()
@@ -29,17 +29,22 @@ struct Post: Then {
     }
     
     init() { }
+    
+    init(caption: String, imageUrl: String) {
+        self.caption = caption
+        self.imageUrl = imageUrl
+    }
 }
 
-//extension Post: Mapper {
-//    init?(map: Map) { }
-//    
-//    mutating func mapping(map: Map) {
-//        id           <- map["id"]
-//        user         <- map["user"]
-//        imageUrl     <- map["imageUrl"]
-//        caption      <- map["caption"]
-//        creationDate <- map["creationDate"]
-//        hasLiked     <- map["hasLiked"]
-//    }
-//}
+extension Post: Mappable {
+    init?(map: Map) { }
+    
+    mutating func mapping(map: Map) {
+        id           <- map["id"]
+        user         <- map["user"]
+        imageUrl     <- map["imageUrl"]
+        caption      <- map["caption"]
+        creationDate <- map["creationDate"]
+        hasLiked     <- map["hasLiked"]
+    }
+}

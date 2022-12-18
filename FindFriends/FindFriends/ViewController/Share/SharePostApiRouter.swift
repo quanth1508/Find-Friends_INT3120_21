@@ -33,12 +33,12 @@ enum SharePostApiRouter: FFApiRouter {
         var params = Parameters()
         switch self {
         case .createNewPost(let post):
-            params["iuserIdd"] = FFUser.shared.id
+            params["userId"] = FFUser.shared.id
             params["id"] = UUID().uuidString
             params["content"] = post.caption
-            params["image"] = post.imageUrl
-            params["love"] = 0
-            params["share"] = 0
+            params["image"] = [post.imageUrl]
+            params["love"] = nil
+            params["share"] = nil
             params["comment"] = nil
             params["createdAt"] = nil
         }

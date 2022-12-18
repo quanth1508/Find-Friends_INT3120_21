@@ -37,6 +37,7 @@ class MainTabBarController: UITabBarController {
         let config = UIImage.SymbolConfiguration(weight: .bold)
         let searchNavController = templateNavController(unselectedImage: UIImage(systemName: "magnifyingglass")!.withTintColor(.label, renderingMode: .alwaysOriginal), selectedImage: UIImage(systemName: "magnifyingglass", withConfiguration: config)!.withTintColor(.label, renderingMode: .alwaysOriginal), rootViewController: UserSearchController(collectionViewLayout: UICollectionViewFlowLayout()))
         
+        // Thêm chia sẻ ảnh
         let plusNavController = templateNavController(unselectedImage: UIImage(systemName: "plus.square")!.withTintColor(.label, renderingMode: .alwaysOriginal), selectedImage: UIImage(systemName: "plus.square")!.withTintColor(.label, renderingMode: .alwaysOriginal))
         
         //user profile

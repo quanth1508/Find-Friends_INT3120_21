@@ -5,11 +5,11 @@
 //  Created by Quan Tran on 27/11/2022.
 //
 
-import Foundation
+import UIKit
 
 
 extension Error {
-    func showAlert() {
-        AlertHelper.showAlert(message: self.localizedDescription)
+    func showAlert(from: UIViewController) {
+        AlertHelper.showAlert(message: self.localizedDescription, from: from)
     }
 }

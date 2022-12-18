@@ -62,18 +62,20 @@ class UserService {
     }
     
     func fetchMyPost(userID: String) -> Guarantee<[Post]> {
-//        firstly {
-//            UserApiRouter.fetchMyPost(userID: userID).pk_request()
-//        }
-//        .map { jsonData in
-//            try APIRouterCommon.parseDefaultErrorMessage(jsonData)
-//            var post = Mapper<Post>().map(JSONObject: jsonData.value(forKeyPath: "payload")) ?? []
-//            return post
-//        }
-//        .recover { error -> Guarantee<[Post]> in
-//            .value([])
-//        }
-        .value([])
+        firstly {
+            UserApiRouter.fetchMyPost(userID: userID).pk_request()
+        }
+        .map { jsonData in
+            try APIRouterCommon.parseDefaultErrorMessage(jsonData)
+            guard let post = Mapper<Post>().mapArrayOrNull(JSONObject: jsonData.value(forKeyPath: "payload"))
+            else {
+                throw APIRouterError.invalidResponseError(message: "Có lỗi khi đăng ký tài khoản")
+            }
+            return post
+        }
+        .recover { error -> Guarantee<[Post]> in
+            .value([])
+        }
     }
 }
 

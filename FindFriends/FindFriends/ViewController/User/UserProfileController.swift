@@ -46,22 +46,26 @@ class UserProfileController: UICollectionViewController {
             self.user = user.convertToUser()
             self.navigationItem.title = self.user?.username
             self.collectionView?.reloadData()
+            self.userProfileHeader?.user = self.user
             self.fetchOrderedPosts()
         }
     }
     
     fileprivate func fetchOrderedPosts() {
         guard let uid = user?.uid else { return }
-//        let ref = Database.database().reference().child("posts").child(uid)
-//        ref.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
-//            guard let dictionary = snapshot.value as? [String: Any] else { return }
-//            guard let user = self.user else { return }
-//            let post = Post(user: user, dictionary: dictionary)
-//            self.posts.insert(post, at: 0)
-//            self.collectionView?.reloadData()
-//        }) { (err) in
-//            print("Failed to fetch ordered posts:", err)
-//        }
+        self.posts.removeAll()
+        firstly {
+            userService.fetchMyPost(userID: uid)
+        }
+        .done { [weak self] posts in
+            guard let self = self else { return }
+            self.posts.append(contentsOf: posts)
+            self.collectionView?.reloadData()
+        }
+        .catch { [weak self] error in
+            guard let self = self else { return }
+            error.showAlert(from: self)
+        }
     }
 
         

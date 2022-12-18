@@ -50,10 +50,10 @@ class SharePhotoController: UIViewController {
         guard let caption = textView.text else { return }
         
         firstly {
-            service.createNewPost(post: Post().with {
-                $0.caption = caption
-                $0.imageUrl = "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2938&q=80"
-            })
+            AuthenticationService().uploadImage(image: postImage)
+        }
+        .then { [weak self] in
+            self?.service.createNewPost(post: Post(caption: caption, imageUrl: $0)) ?? .value
         }
         .done { [weak self] in
             guard let self = self else { return }

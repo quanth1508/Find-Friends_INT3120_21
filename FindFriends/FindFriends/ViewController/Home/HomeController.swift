@@ -111,12 +111,10 @@ class HomeController: UICollectionViewController, HomePostCellDelegate {
     
     
     // MARK:- ScrollViewDelegate
-    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
-        //print("\(offsetY): \(contentHeight)")
         if offsetY > contentHeight - scrollView.frame.size.height * leadingScreenForBatching {
             if !fetchingMore && !endReached {
                 fetchFeedPosts()
@@ -181,36 +179,6 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
     }
     
     func didLike(for cell: HomePostCell) {
-//        guard let indexPath = collectionView?.indexPath(for: cell) else { return }
-//
-//        var post = posts[indexPath.item]
-//
-//        guard let postId = post.id else { return }
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
-//
-//        // update like db
-//        let values = [uid: post.hasLiked ? 0 : 1]
-//
-//        Database.database().reference().child("likes").child(postId).updateChildValues(values)
-//        { (err, _) in
-//
-//            if let err = err {
-//                print("Failed to like post:", err)
-//                return
-//            }
-//
-//            print("Successfully liked post")
-//
-//            post.hasLiked = !post.hasLiked
-//
-//            DispatchQueue.main.async {
-//                self.posts[indexPath.item] = post
-//                self.collectionView?.reloadItems(at: [indexPath])
-//            }
-//
-//        }
-//        // update post
-//        Database.database().reference().child("FeedPosts").child(uid).child(postId).updateChildValues(["hasLiked": post.hasLiked ? false: true])
     }
 
 }
